@@ -21,10 +21,10 @@ void setupWatchdog() {
   // Configure the prescaler and the WDT for interrupt mode only
   // 8s: WDP3 & WDP0
   // 1s: WDP2 & WDP1
-  WDTCSR = _BV(WDP3) | _BV(WDP0) | _BV(WDIE);
+  WDTCSR = _BV(WDP2) | _BV(WDP1) | _BV(WDIE);
 
   // enable interrupt
-  WDTCSR |= 1<<WDIE;
+  WDTCSR |= _BV(WDIE);
   sei();
 
   enterSleepMode = true;
@@ -33,10 +33,11 @@ void setupWatchdog() {
 void enterSleep() {
   #ifdef DEBUG
     Serial.println("Enter sleep mode");
+    Serial.println("----------------");
     delay(100);
   #endif
   
-  set_sleep_mode(SLEEP_MODE_PWR_SAVE);  
+  set_sleep_mode(SLEEP_MODE_PWR_DOWN);  
   sleep_enable();  
   power_adc_disable();    // disable analog inputs
   power_spi_disable();
@@ -44,12 +45,12 @@ void enterSleep() {
   power_timer2_disable();
   power_twi_disable();
   sleep_mode();
-  // Program resumes after this line when the WDT Interrupt iss finished
+  // Program resumes after this line when the WDT Interrupt is finished
   #ifdef DEBUG
     Serial.println("woke up");
   #endif
   sleep_disable();
-  power_all_enable();     // Komponenten wieder aktivieren
+  power_all_enable();
 }
 
 ISR(WDT_vect) {  

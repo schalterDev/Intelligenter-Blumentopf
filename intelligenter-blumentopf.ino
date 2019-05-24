@@ -7,13 +7,6 @@
 
 volatile bool enterSleepMode = false;
 
-/**
- * @returns a value between 0 and 1023
- */
-int readPotentiomenter() {
-  return analogRead(POT_PIN);
-}
-
 void setup() {
   #ifdef DEBUG
     Serial.begin(9600);
@@ -27,12 +20,11 @@ void setup() {
 
 void loop() {
   if (enterSleepMode) {
-    int potentiometerValue = readPotentiomenter();
-
-    #ifdef DEBUG
-      Serial.print("Potentiometer: ");
-      Serial.println(potentiometerValue);
-    #endif
+    if (needWater()) {
+      #ifdef DEBUG
+        Serial.println("Needs water");
+      #endif
+    }
     
     enterSleepMode = false;
     enterSleep();
