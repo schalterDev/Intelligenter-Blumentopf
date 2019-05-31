@@ -62,3 +62,7 @@ ISR(WDT_vect) {
   
   enterSleepMode = true;
 }
+
+void switchInterrupt() {
+  enterManualMode = true;
+}

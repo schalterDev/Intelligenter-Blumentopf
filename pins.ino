@@ -6,6 +6,6 @@ void setupPins() {
   pinMode(WATER_FUEL_DIOD_PIN, OUTPUT);
   
   pinMode(SWITCH_PIN, INPUT);
-  digitalWrite(SWITCH_PIN, HIGH); // turn on pullup resistor
+  digitalWrite(SWITCH_PIN, HIGH);
+  attachInterrupt(digitalPinToInterrupt(SWITCH_PIN), switchInterrupt, RISING);
 }
-

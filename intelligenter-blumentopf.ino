@@ -5,7 +5,23 @@
 // add a comment for production
 #define DEBUG
 
+volatile bool firstManualMode = true;
 volatile bool enterSleepMode = false;
+volatile bool enterManualMode = false;
+
+void startPump() {
+  #ifdef DEBUG
+    Serial.println("Start Pump");
+  #endif
+  
+  digitalWrite(PUMP_PIN, HIGH);
+  delay(DUARTION_PUMP);
+  digitalWrite(PUMP_PIN, LOW);
+
+  #ifdef DEBUG
+    Serial.println("Stop Pump");
+  #endif
+}
 
 void setup() {
   #ifdef DEBUG
@@ -19,11 +35,28 @@ void setup() {
 }
 
 void loop() {
+  if (enterManualMode && firstManualMode) {
+    firstManualMode = false;
+    enterManualMode = false;
+  }
+  
+  if (enterManualMode) {
+    #ifdef DEBUG
+      Serial.println("manual mode");
+    #endif
+    
+    startPump();
+  
+    enterManualMode = false;
+    enterSleep();
+  }
+  
   if (enterSleepMode) {
     if (needWater()) {
       #ifdef DEBUG
         Serial.println("Needs water");
       #endif
+      startPump();
     }
     
     enterSleepMode = false;
