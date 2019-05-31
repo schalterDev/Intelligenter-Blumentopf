@@ -8,4 +8,6 @@ void setupPins() {
   pinMode(SWITCH_PIN, INPUT);
   digitalWrite(SWITCH_PIN, HIGH);
   attachInterrupt(digitalPinToInterrupt(SWITCH_PIN), switchInterrupt, RISING);
+  
+  digitalWrite(WATER_FUEL_MEASURE_PIN, HIGH);
 }

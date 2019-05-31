@@ -48,7 +48,6 @@ void loop() {
     startPump();
   
     enterManualMode = false;
-    enterSleep();
   }
   
   if (enterSleepMode) {
@@ -58,8 +57,17 @@ void loop() {
       #endif
       startPump();
     }
+
+    if (enoughWater()) {
+      digitalWrite(WATER_FUEL_DIOD_PIN, LOW);
+    } else {
+      digitalWrite(WATER_FUEL_DIOD_PIN, HIGH);
+    }
     
     enterSleepMode = false;
+  }
+
+  if (!enterSleepMode && !enterManualMode) {
     enterSleep();
   }
 }
