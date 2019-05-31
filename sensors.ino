@@ -24,6 +24,16 @@ int readMoistureSensor() {
   return readAnalog(MOISTURE_PIN, 'm');
 }
 
+bool enoughWater() {
+  bool needWater = digitalRead(WATER_FUEL_MEASURE_PIN) == LOW;
+
+  #ifdef DEBUG
+    Serial.print("Enough water: ");
+    Serial.println(needWater);
+  #endif
+  return needWater;
+}
+
 bool needWater() {
   int potentiometer = readPotentiomenter();
   int moistureSensor = readMoistureSensor();

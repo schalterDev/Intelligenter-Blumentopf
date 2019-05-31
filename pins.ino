@@ -7,5 +7,6 @@ void setupPins() {
   
   pinMode(SWITCH_PIN, INPUT);
   digitalWrite(SWITCH_PIN, HIGH); // turn on pullup resistor
+  digitalWrite(WATER_FUEL_MEASURE_PIN, HIGH);
 }
 

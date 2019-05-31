@@ -25,8 +25,19 @@ void loop() {
         Serial.println("Needs water");
       #endif
     }
+
+    if (enoughWater()) {
+      Serial.println("LOW");
+      digitalWrite(WATER_FUEL_DIOD_PIN, LOW);
+    } else {
+      Serial.println("HIGH");
+      digitalWrite(WATER_FUEL_DIOD_PIN, HIGH);
+    }
     
     enterSleepMode = false;
+  }
+
+  if (!enterSleepMode) {
     enterSleep();
   }
 }
