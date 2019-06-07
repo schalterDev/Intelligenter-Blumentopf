@@ -35,9 +35,12 @@ bool enoughWater() {
 }
 
 bool needWater() {
+  digitalWrite(MOISTURE_VCC_PIN, HIGH);
+  delay(10);
+  
   int potentiometer = readPotentiomenter();
   int moistureSensor = readMoistureSensor();
-    
+
   #ifdef KAPAZITIVE_MOISUTRE_SENSOR
     return kapazitiveSensorNeedWater(moistureSensor, potentiometer);
   #else

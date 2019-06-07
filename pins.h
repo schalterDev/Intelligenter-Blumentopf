@@ -4,6 +4,7 @@ int const PUMP_PIN = 10;
 int const WATER_FUEL_MEASURE_PIN = 11;
 int const WATER_FUEL_DIOD_PIN = 4;
 int const SWITCH_PIN = 2;
+int const MOISTURE_VCC_PIN = 12;
 
 int const DURATION_PUMP = 3000;
 

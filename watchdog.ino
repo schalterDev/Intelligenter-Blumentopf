@@ -34,6 +34,8 @@ void enterSleep() {
     Serial.println("----------------");
     delay(100);
   #endif
+
+  digitalWrite(MOISTURE_VCC_PIN, LOW);
   
   set_sleep_mode(SLEEP_MODE_PWR_DOWN);  
   sleep_enable();  
