@@ -2,8 +2,6 @@
 #include <avr/power.h>
 #include <avr/sleep.h>
 
-volatile int wdtCounter = 0;
-
 /**
  * Starts the watchdog with 8s 
  * After this the main loop will stop and only external interrupts will work

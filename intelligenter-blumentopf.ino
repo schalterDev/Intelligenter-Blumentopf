@@ -8,6 +8,7 @@
 volatile bool firstManualMode = true;
 volatile bool enterSleepMode = false;
 volatile bool enterManualMode = false;
+volatile unsigned long wdtCounter = 0;
 
 void startPump() {
   #ifdef DEBUG
@@ -51,7 +52,19 @@ void loop() {
   }
   
   if (enterSleepMode) {
-    if (needWater()) {
+    long timeInterval = map(readPotentiomenter(), 0, 1023, 2, 151200L);
+    #ifdef DEBUG
+      Serial.print("Mapped time interval in seconds divided by 8: ");
+      Serial.println(timeInterval);
+    #endif
+    
+    if (USE_TIME_INTERVAL && wdtCounter >= timeInterval) {
+      #ifdef DEBUG
+        Serial.println("Needs water (Interval)");
+      #endif
+      wdtCounter = 0;
+      startPump();
+    } else if (needWater()) {
       #ifdef DEBUG
         Serial.println("Needs water");
       #endif
