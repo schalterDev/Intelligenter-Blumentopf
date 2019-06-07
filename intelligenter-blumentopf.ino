@@ -15,7 +15,7 @@ void startPump() {
   #endif
   
   digitalWrite(PUMP_PIN, HIGH);
-  delay(DUARTION_PUMP);
+  delay(DURATION_PUMP);
   digitalWrite(PUMP_PIN, LOW);
 
   #ifdef DEBUG
