@@ -30,11 +30,11 @@ void setup() {
    #endif
   
   setupPins();
-  
+  startCalibrate();
   setupWatchdog();
 }
 
-void loop() {
+void loop() {  
   if (enterManualMode && firstManualMode) {
     firstManualMode = false;
     enterManualMode = false;
