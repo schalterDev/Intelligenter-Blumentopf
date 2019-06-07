@@ -62,9 +62,16 @@ bool kapazitiveSensorNeedWater(int moistureSensor, int potentiometer) {
 
 bool resitiveSensorNeedWater(int moistureSensor, int potentiometer) {
   #ifdef DEBUG
-      Serial.println("Use resitive moisture sensor");
-    #endif
-    
-  return true;
+    Serial.println("Use resitive moisture sensor");
+  #endif
+
+  int potentiometerValueMapRange = map(potentiometer, 0, 1023, RESITIVE_WATER_VALUE, RESITIVE_AIR_VALUE);
+
+  #ifdef DEBUG
+    Serial.print("Mapped potentiometer: ");
+    Serial.println(potentiometerValueMapRange);
+  #endif
+  
+  return moistureSensor > potentiometerValueMapRange;
 }
 

@@ -8,9 +8,12 @@ int const SWITCH_PIN = 2;
 int const DURATION_PUMP = 3000;
 
 // uncomment when you want to use resisitve sensor (causes erosion)
-#define KAPAZITIVE_MOISUTRE_SENSOR
+// #define KAPAZITIVE_MOISUTRE_SENSOR
 
 // value when the sensor is just laying on the table
 int const KAPAZITIVE_AIR_VALUE = 830;
 // value when the sensor is in water
 int const KAPAZITIVE_WATER_VALUE = 420;
+
+int const RESITIVE_AIR_VALUE = 1050;
+int const RESITIVE_WATER_VALUE = 350;
