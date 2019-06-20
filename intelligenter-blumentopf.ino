@@ -1,5 +1,3 @@
-#include <avr/wdt.h>
-
 #include "pins.h"
 
 volatile bool firstManualMode = true;
@@ -49,7 +47,7 @@ void loop() {
   }
   
   if (enterSleepMode) {
-    long timeInterval = map(readPotentiomenter(), 0, 1023, 2, 151200L);
+    unsigned long timeInterval = map(readPotentiomenter(), 0, 1023, 2, 151200L);
     #ifdef DEBUG
       Serial.print("Mapped time interval in seconds divided by 8: ");
       Serial.println(timeInterval);

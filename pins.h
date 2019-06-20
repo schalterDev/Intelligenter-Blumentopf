@@ -25,4 +25,4 @@ int const RESITIVE_WATER_VALUE = 250;
 // ignore sensor and use interval to start pump
 int const USE_TIME_INTERVAL = 1;
 // time in seconds divided by 8
-int const TIME_INTERVAL = 2;
+unsigned long const TIME_INTERVAL = 2;
