@@ -19,7 +19,7 @@ void setupWatchdog() {
   // Configure the prescaler and the WDT for interrupt mode only
   // 8s: WDP3 & WDP0
   // 1s: WDP2 & WDP1
-  WDTCSR = _BV(WDP2) | _BV(WDP1) | _BV(WDIE);
+  WDTCSR = _BV(WDP3) | _BV(WDP0) | _BV(WDIE);
 
   // enable interrupt
   WDTCSR |= _BV(WDIE);

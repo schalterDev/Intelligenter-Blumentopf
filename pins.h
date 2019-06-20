@@ -8,7 +8,7 @@ int const MOISTURE_VCC_PIN = 12;
 
 int const DURATION_PUMP = 3000;
 
-// uncomment when you want to use resisitve sensor (causes erosion)
+// comment when you want to use resisitve sensor (causes erosion)
 // #define KAPAZITIVE_MOISUTRE_SENSOR
 
 // value when the sensor is just laying on the table
@@ -18,6 +18,9 @@ int const KAPAZITIVE_WATER_VALUE = 420;
 
 int const RESITIVE_AIR_VALUE = 1050;
 int const RESITIVE_WATER_VALUE = 250;
+
+// add a comment for production
+#define DEBUG
 
 // ignore sensor and use interval to start pump
 int const USE_TIME_INTERVAL = 1;

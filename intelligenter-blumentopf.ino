@@ -2,9 +2,6 @@
 
 #include "pins.h"
 
-// add a comment for production
-#define DEBUG
-
 volatile bool firstManualMode = true;
 volatile bool enterSleepMode = false;
 volatile bool enterManualMode = false;
