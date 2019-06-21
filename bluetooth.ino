@@ -22,11 +22,17 @@ int readByteByBluetooth() {
 }
 */
 
-void sendDataByBluetooth(char string[]) {
-  bluetooth.println(string);
+void sendDataByBluetooth(char string[], bool newLine) {
+  if (newLine)
+    bluetooth.println(string);
+  else
+    bluetooth.print(string);
 }
 
-void sendIntByBluetooth(int message) {
-  bluetooth.println(message);
+void sendIntByBluetooth(int message, bool newLine) {
+   if (newLine)
+    bluetooth.println(message);
+  else
+    bluetooth.print(message);
 }
 

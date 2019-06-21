@@ -1,6 +1,6 @@
 uint8_t const POT_PIN = A0;         // pin 14 in logs
 uint8_t const MOISTURE_PIN = A1;    // pin 15 in logs
-uint8_t const PUMP_PIN = 10;
+uint8_t const PUMP_PIN = 8;
 uint8_t const WATER_FUEL_MEASURE_PIN = 9;
 uint8_t const WATER_FUEL_DIOD_PIN = 4;
 uint8_t const SWITCH_PIN = 2;

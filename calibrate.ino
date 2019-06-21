@@ -4,7 +4,7 @@
 // The LED lights when the pump would start 
 // by pressing the button the calibrate mode ends and the led blinks 5 times
 void startCalibrate() {
-  debugMessage("Start Calibrating");
+  debugMessage("Start Calibrating", true);
   
   // while the button is not pressed
   while (digitalRead(SWITCH_PIN) == HIGH) {
@@ -15,7 +15,7 @@ void startCalibrate() {
     }
   }
   
-  debugMessage("Calibrated");
+  debugMessage("Calibrated", true);
   
   for (int i = 0; i < 5; i++) {
     digitalWrite(WATER_FUEL_DIOD_PIN, HIGH);
