@@ -6,28 +6,27 @@ volatile bool enterManualMode = false;
 volatile unsigned long wdtCounter = 0;
 
 void startPump() {
-  #ifdef DEBUG
-    Serial.println("Start Pump");
-  #endif
+  debugMessage("Start Pump");
   
   digitalWrite(PUMP_PIN, HIGH);
   delay(DURATION_PUMP);
   digitalWrite(PUMP_PIN, LOW);
 
-  #ifdef DEBUG
-    Serial.println("Stop Pump");
-  #endif
+  debugMessage("Stop Pump");
 }
 
 void setup() {
   #ifdef DEBUG
-    Serial.begin(9600);
-    Serial.println("Started");
-   #endif
+    Serial.begin(38400);
+  #endif
+   
+  debugMessage("Started");
   
   setupPins();
+  initBluetooth();
+  
   startCalibrate();
-  setupWatchdog();
+  setupWatchdog();  
 }
 
 void loop() {  
@@ -37,9 +36,7 @@ void loop() {
   }
   
   if (enterManualMode) {
-    #ifdef DEBUG
-      Serial.println("manual mode");
-    #endif
+    debugMessage("manual mode");
     
     startPump();
   
@@ -48,21 +45,16 @@ void loop() {
   
   if (enterSleepMode) {
     unsigned long timeInterval = map(readPotentiomenter(), 0, 1023, 2, 151200L);
-    #ifdef DEBUG
-      Serial.print("Mapped time interval in seconds divided by 8: ");
-      Serial.println(timeInterval);
-    #endif
+    
+    debugMessage("Mapped time interval in seconds divided by 8: ");
+    debugMessage(timeInterval);
     
     if (USE_TIME_INTERVAL && wdtCounter >= timeInterval) {
-      #ifdef DEBUG
-        Serial.println("Needs water (Interval)");
-      #endif
+      debugMessage("Needs water (Interval)");
       wdtCounter = 0;
       startPump();
     } else if (needWater()) {
-      #ifdef DEBUG
-        Serial.println("Needs water");
-      #endif
+      debugMessage("Needs water");
       startPump();
     }
 
@@ -79,3 +71,24 @@ void loop() {
     enterSleep();
   }
 }
+
+void debugMessage(char message[]) {
+  #ifdef DEBUG
+    Serial.println(message);
+  #endif
+
+  #ifdef DEBUG_BLUETOOTH
+    sendDataByBluetooth(message);
+  #endif
+}
+
+void intDebugMessage(int message) {
+  #ifdef DEBUG
+    Serial.println(message);
+  #endif
+
+  #ifdef DEBUG_BLUETOOTH
+    sendIntByBluetooth(message);
+  #endif
+}
+

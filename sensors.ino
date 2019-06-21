@@ -2,18 +2,12 @@
  * @returns a value between 0 and 1023
  */
 int readAnalog(int pin, char string) {
-  #ifdef DEBUG
-    int value = analogRead(pin);
-    Serial.print("read pin ");
-    Serial.print(pin);
-    Serial.print(", ");
-    Serial.print(string);
-    Serial.print(": ");
-    Serial.println(value);
-    return value;
-  #endif
-  
-  return analogRead(pin);
+  int value = analogRead(pin);
+  debugMessage("read pin ");
+  intDebugMessage(pin);
+  debugMessage(string);
+  intDebugMessage(value);
+  return value;
 }
 
 int readPotentiomenter() {
@@ -49,32 +43,24 @@ bool needWater() {
 }
 
 bool kapazitiveSensorNeedWater(int moistureSensor, int potentiometer) {
-  #ifdef DEBUG
-    Serial.println("Use kapazitive moisture sensor");
-  #endif
+  debugMessage("Use kapazitive moisture sensor");
 
   int potentiometerValueMapRange = map(potentiometer, 0, 1023, KAPAZITIVE_WATER_VALUE, KAPAZITIVE_AIR_VALUE);
-
-  #ifdef DEBUG
-    Serial.print("Mapped potentiometer: ");
-    Serial.println(potentiometerValueMapRange);
-  #endif
+  
+  debugMessage("Mapped potentiometer: ");
+  intDebugMessage(potentiometerValueMapRange);
     
   return moistureSensor > potentiometerValueMapRange;
 }
 
 bool resitiveSensorNeedWater(int moistureSensor, int potentiometer) {
-  #ifdef DEBUG
-    Serial.println("Use resitive moisture sensor");
-  #endif
+  debugMessage("Use resitive moisture sensor");
 
   int potentiometerValueMapRange = map(potentiometer, 0, 1023, RESITIVE_WATER_VALUE, RESITIVE_AIR_VALUE);
 
-  #ifdef DEBUG
-    Serial.print("Mapped potentiometer: ");
-    Serial.println(potentiometerValueMapRange);
-  #endif
-  
+  debugMessage("Mapped potentiometer: ");
+  intDebugMessage(potentiometerValueMapRange);
+ 
   return moistureSensor > potentiometerValueMapRange;
 }
 

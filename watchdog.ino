@@ -29,11 +29,8 @@ void setupWatchdog() {
 }
 
 void enterSleep() {
-  #ifdef DEBUG
-    Serial.println("Enter sleep mode");
-    Serial.println("----------------");
-    delay(100);
-  #endif
+  debugMessage("Enter sleep mode");
+  debugMessage("----------------");
 
   digitalWrite(MOISTURE_VCC_PIN, LOW);
   
@@ -46,19 +43,15 @@ void enterSleep() {
   power_twi_disable();
   sleep_mode();
   // Program resumes after this line when the WDT Interrupt is finished
-  #ifdef DEBUG
-    Serial.println("woke up");
-  #endif
+  debugMessage("woke up");
   sleep_disable();
   power_all_enable();
 }
 
-ISR(WDT_vect) {  
-  #ifdef DEBUG
-    wdtCounter++;
-    Serial.print("Watchdog interrupt start, counter: ");
-    Serial.println(wdtCounter);
-  #endif
+ISR(WDT_vect) {
+  wdtCounter++;
+  debugMessage("Watchdog interrupt start, counter: ");
+  debugMessage(wdtCounter);
   
   enterSleepMode = true;
 }
@@ -66,3 +59,4 @@ ISR(WDT_vect) {
 void switchInterrupt() {
   enterManualMode = true;
 }
+
