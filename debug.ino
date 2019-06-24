@@ -1,4 +1,4 @@
-void debugMessage(char message[], bool newLine = true) {
+void debugMessage(String message, bool newLine = true) {
   #ifdef DEBUG
     if (newLine) 
       Serial.println(message);
@@ -24,7 +24,7 @@ void debugMessage(int message, bool newLine = true) {
   #endif
 }
 
-void debugMessage(unsigned long message, bool newLine) {
+void debugMessageL(unsigned long message, bool newLine = true) {
   #ifdef DEBUG
     if (newLine) 
       Serial.println(message);

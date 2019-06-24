@@ -44,12 +44,12 @@ void loop() {
   
   if (enterSleepMode) {
     if (USE_TIME_INTERVAL) {
-      unsigned long timeInterval = map(readPotentiomenter(), 0, 1023, 2, 151200L);
+      unsigned long timeInterval = readPotentiometerTime();
       debugMessage("Mapped time interval in seconds divided by 8: ", false);
-      debugMessage(timeInterval);
+      debugMessageL(timeInterval);
     
       debugMessage("wdt counter: ", false);
-      debugMessage(timeInterval);
+      debugMessageL(wdtCounter);
       if (wdtCounter >= timeInterval) {
         debugMessage("Needs water (Interval)");
         wdtCounter = 0;

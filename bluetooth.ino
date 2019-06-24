@@ -10,7 +10,7 @@ void initBluetooth() {
   bluetooth.println("bluetooth available");
 }
 
-void sendDataByBluetooth(char string[], bool newLine) {
+void sendDataByBluetooth(String string, bool newLine) {
   if (newLine)
     bluetooth.println(string);
   else

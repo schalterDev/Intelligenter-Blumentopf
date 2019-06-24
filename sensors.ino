@@ -1,22 +1,39 @@
 /**
  * @returns a value between 0 and 1023
  */
-int readAnalog(int pin, char string) {
+int readAnalog(int pin, String string) {
   int value = analogRead(pin);
   debugMessage("read pin ", false);
   debugMessage(pin, false);
   debugMessage(", ", false);
   debugMessage(string, false);
+  debugMessage(": ", false);
   debugMessage(value);
   return value;
 }
 
 int readPotentiomenter() {
-  return readAnalog(POT_PIN, 'p');
+  return readAnalog(POT_PIN, "potentiometer");
 }
 
 int readMoistureSensor() {  
-  return readAnalog(MOISTURE_PIN, 'm');
+  return readAnalog(MOISTURE_PIN, "moisture");
+}
+
+unsigned long readPotentiometerTime() {
+  int potentiometer = readPotentiomenter();
+  if (potentiometer < 2) {
+    return 1;
+  }
+  
+  float timeIntervalMap = mapFloat((float) potentiometer, 0.0, 1023.0, 10.8, 17.2); // 2^17.2
+  debugMessage("mapped value: ", false);
+  debugMessage(timeIntervalMap);
+  return (unsigned long) pow(2.0, timeIntervalMap);
+}
+
+float mapFloat(float x, float in_min, float in_max, float out_min, float out_max) {
+  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
 bool enoughWater() {
