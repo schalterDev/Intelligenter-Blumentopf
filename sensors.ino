@@ -4,9 +4,10 @@
 int readAnalog(int pin, char string) {
   int value = analogRead(pin);
   debugMessage("read pin ", false);
-  intDebugMessage(pin, false);
+  debugMessage(pin, false);
+  debugMessage(", ", false);
   debugMessage(string, false);
-  intDebugMessage(value, true);
+  debugMessage(value);
   return value;
 }
 
@@ -22,7 +23,7 @@ bool enoughWater() {
   bool needWater = digitalRead(WATER_FUEL_MEASURE_PIN) == LOW;
 
   debugMessage("Enough water: ", false);
-  intDebugMessage(needWater, true);
+  debugMessage(needWater);
   return needWater;
 }
 
@@ -41,23 +42,23 @@ bool needWater() {
 }
 
 bool kapazitiveSensorNeedWater(int moistureSensor, int potentiometer) {
-  debugMessage("Use kapazitive moisture sensor", true);
+  debugMessage("Use kapazitive moisture sensor");
 
   int potentiometerValueMapRange = map(potentiometer, 0, 1023, KAPAZITIVE_WATER_VALUE, KAPAZITIVE_AIR_VALUE);
   
   debugMessage("Mapped potentiometer: ", false);
-  intDebugMessage(potentiometerValueMapRange, true);
+  debugMessage(potentiometerValueMapRange);
     
   return moistureSensor > potentiometerValueMapRange;
 }
 
 bool resitiveSensorNeedWater(int moistureSensor, int potentiometer) {
-  debugMessage("Use resitive moisture sensor", true);
+  debugMessage("Use resitive moisture sensor");
 
   int potentiometerValueMapRange = map(potentiometer, 0, 1023, RESITIVE_WATER_VALUE, RESITIVE_AIR_VALUE);
 
   debugMessage("Mapped potentiometer: ", false);
-  intDebugMessage(potentiometerValueMapRange, true);
+  debugMessage(potentiometerValueMapRange);
  
   return moistureSensor > potentiometerValueMapRange;
 }

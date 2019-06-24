@@ -3,24 +3,12 @@
 SoftwareSerial bluetooth(BLUETOOTH_TX_PIN, BLUETOOTH_RX_PIN);
   
 const static int BLUETOOTH_SPEED = 9600;
-const int NO_DATA = 250;
+const char NO_DATA = -1;
 
 void initBluetooth() {
   bluetooth.begin(BLUETOOTH_SPEED);
   bluetooth.println("bluetooth available");
 }
-
-/*
-int readByteByBluetooth() {
-  int dataBluetooth = NO_DATA;
-  
-  if (bluetooth.available()) {
-    dataBluetooth = bluetooth.read();
-  }
-
-  return dataBluetooth;
-}
-*/
 
 void sendDataByBluetooth(char string[], bool newLine) {
   if (newLine)
@@ -29,10 +17,28 @@ void sendDataByBluetooth(char string[], bool newLine) {
     bluetooth.print(string);
 }
 
-void sendIntByBluetooth(int message, bool newLine) {
+void sendDataByBluetooth(int message, bool newLine) {
    if (newLine)
     bluetooth.println(message);
   else
     bluetooth.print(message);
 }
 
+void sendDataByBluetooth(unsigned long message, bool newLine) {
+  if (newLine)
+    bluetooth.println(message);
+  else
+    bluetooth.print(message);
+}
+
+//char readByteByBluetooth() {
+//  char dataBluetooth = NO_DATA;
+//  
+//  if (bluetooth.available() > 0) {
+//    dataBluetooth = bluetooth.read();
+//    debugMessage("bluetooth: ", false);
+//    debugMessage(dataBluetooth);
+//  }
+//
+//  return dataBluetooth;
+//}

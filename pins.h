@@ -22,11 +22,11 @@ int const RESITIVE_AIR_VALUE = 1050;
 int const RESITIVE_WATER_VALUE = 250;
 
 // add a comment for production
-#define DEBUG
+// #define DEBUG
 #define DEBUG_BLUETOOTH
 
 // ignore sensor and use interval to start pump
-char const USE_TIME_INTERVAL = 1;
+char USE_TIME_INTERVAL = 0;
 // time in seconds divided by 8
 unsigned long const TIME_INTERVAL = 2;
 

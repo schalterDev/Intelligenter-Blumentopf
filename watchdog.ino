@@ -29,8 +29,8 @@ void setupWatchdog() {
 }
 
 void enterSleep() {
-  debugMessage("Enter sleep mode", true);
-  debugMessage("----------------", true);
+  debugMessage("Enter sleep mode");
+  debugMessage("----------------");
 
   digitalWrite(MOISTURE_VCC_PIN, LOW);
   
@@ -43,15 +43,15 @@ void enterSleep() {
   power_twi_disable();
   sleep_mode();
   // Program resumes after this line when the WDT Interrupt is finished
-  debugMessage("woke up", true);
+  debugMessage("woke up");
   sleep_disable();
   power_all_enable();
 }
 
 ISR(WDT_vect) {
   wdtCounter++;
-  debugMessage("Watchdog interrupt start, counter: ", false);
-  debugMessage(wdtCounter, true);
+//  debugMessage("Watchdog interrupt start, counter: ", false);
+//  debugMessage(wdtCounter);
   
   enterSleepMode = true;
 }
