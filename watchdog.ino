@@ -44,15 +44,17 @@ void enterSleep() {
   sleep_mode();
   // Program resumes after this line when the WDT Interrupt is finished
   debugMessage("woke up");
+  wakeUp();
+}
+
+void wakeUp() {
+  debugMessage("wake up");
   sleep_disable();
   power_all_enable();
 }
 
 ISR(WDT_vect) {
-  wdtCounter++;
-//  debugMessage("Watchdog interrupt start, counter: ", false);
-//  debugMessage(wdtCounter);
-  
+  wdtCounter++;  
   enterSleepMode = true;
 }
 

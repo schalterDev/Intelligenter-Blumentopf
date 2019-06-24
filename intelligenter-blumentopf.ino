@@ -38,13 +38,11 @@ void loop() {
   
   if (enterManualMode) {
     debugMessage("manual mode");
-    
     startPump();
-  
     enterManualMode = false;
   }
   
-  if (enterSleepMode) {    
+  if (enterSleepMode) {
     if (USE_TIME_INTERVAL) {
       unsigned long timeInterval = map(readPotentiomenter(), 0, 1023, 2, 151200L);
       debugMessage("Mapped time interval in seconds divided by 8: ", false);
