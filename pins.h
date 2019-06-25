@@ -4,6 +4,7 @@ uint8_t const PUMP_PIN = 8;
 uint8_t const WATER_FUEL_MEASURE_PIN = 9;
 uint8_t const WATER_FUEL_DIOD_PIN = 4;
 uint8_t const SWITCH_PIN = 2;
+uint8_t const POT_VCC_PIN = 7;
 uint8_t const MOISTURE_VCC_PIN = 12;
 uint8_t const BLUETOOTH_TX_PIN = 10;
 uint8_t const BLUETOOTH_RX_PIN = 11;
