@@ -8,7 +8,7 @@ uint8_t const MOISTURE_VCC_PIN = 12;
 uint8_t const BLUETOOTH_TX_PIN = 10;
 uint8_t const BLUETOOTH_RX_PIN = 11;
 
-int const DURATION_PUMP = 3000;
+int const DURATION_PUMP = 2000;
 
 // comment when you want to use resisitve sensor (causes erosion)
 // #define KAPAZITIVE_MOISUTRE_SENSOR

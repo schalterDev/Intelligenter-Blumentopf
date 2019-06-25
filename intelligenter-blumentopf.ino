@@ -5,6 +5,7 @@ volatile bool firstManualMode = true;
 volatile bool enterSleepMode = false;
 volatile bool enterManualMode = false;
 volatile unsigned long wdtCounter = 0;
+volatile unsigned long lastwdtCounter = 0;
 
 void startPump() {
   debugMessage("Start Pump");
@@ -36,13 +37,17 @@ void loop() {
     enterManualMode = false;
   }
   
-  if (enterManualMode) {
+  if (enterManualMode && lastwdtCounter != wdtCounter) {
     debugMessage("manual mode");
     startPump();
     enterManualMode = false;
+
+    lastwdtCounter = wdtCounter;
+  } else if (enterManualMode) {
+    enterManualMode = false;
   }
   
-  if (enterSleepMode) {
+  if (enterSleepMode) {    
     if (USE_TIME_INTERVAL) {
       unsigned long timeInterval = readPotentiometerTime();
       debugMessage("Mapped time interval in seconds divided by 8: ", false);
@@ -54,20 +59,22 @@ void loop() {
         debugMessage("Needs water (Interval)");
         wdtCounter = 0;
         startPump();
+        lastwdtCounter = wdtCounter;
       }
     } else if (needWater()) {
       debugMessage("Needs water");
       startPump();
-    }
-
-    if (enoughWater()) {
-      digitalWrite(WATER_FUEL_DIOD_PIN, LOW);
-    } else {
-      digitalWrite(WATER_FUEL_DIOD_PIN, HIGH);
+      lastwdtCounter = wdtCounter;
     }
     
     enterSleepMode = false;
   }
+
+  if (enoughWater()) {
+      digitalWrite(WATER_FUEL_DIOD_PIN, LOW);
+    } else {
+      digitalWrite(WATER_FUEL_DIOD_PIN, HIGH);
+    }
 
   if (!enterSleepMode && !enterManualMode) {
     enterSleep();
