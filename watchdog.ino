@@ -33,6 +33,7 @@ void enterSleep() {
   debugMessage("----------------");
 
   digitalWrite(MOISTURE_VCC_PIN, LOW);
+  digitalWrite(POT_VCC_PIN, LOW);
   
   set_sleep_mode(SLEEP_MODE_PWR_DOWN);  
   sleep_enable();  
@@ -51,6 +52,7 @@ void wakeUp() {
   debugMessage("wake up");
   sleep_disable();
   power_all_enable();
+  digitalWrite(POT_VCC_PIN, HIGH);
 }
 
 ISR(WDT_vect) {
