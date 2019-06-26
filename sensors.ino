@@ -46,7 +46,7 @@ bool enoughWater() {
 
 bool needWater() {
   digitalWrite(MOISTURE_VCC_PIN, HIGH);
-  delay(10);
+  delay(100);
   
   int potentiometer = readPotentiomenter();
   int moistureSensor = readMoistureSensor();
